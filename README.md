@@ -5,3 +5,4 @@ Grupo:
 - Gustavo Montanini Victor
 - Mariana Gabriely
 - Lia Naomi Hoida
+- Nicholas Gabriel Soares Yamasita Sales
