@@ -28,3 +28,15 @@ CREATE TABLE IF NOT EXISTS tipos_ingresso (
     fator_preco DECIMAL(5,2),
     categoria_tecnica VARCHAR(20) DEFAULT '2D'
     );
+
+-- Homologacoes
+CREATE TABLE IF NOT EXISTS homologacoes (
+    id_homologacao BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_filme BIGINT NOT NULL,
+    id_sala BIGINT NOT NULL,
+    requisito_tecnico VARCHAR(50),
+    status_validacao VARCHAR(20),
+    data_analise TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_filme) REFERENCES filmes(id_filme) ON DELETE CASCADE,
+    FOREIGN KEY (id_sala) REFERENCES salas(id_sala) ON DELETE CASCADE
+    );
