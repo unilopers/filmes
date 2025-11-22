@@ -26,3 +26,23 @@ INSERT INTO tipos_ingresso (descricao, fator_preco, categoria_tecnica) VALUES ('
 INSERT INTO tipos_ingresso (descricao, fator_preco, categoria_tecnica) VALUES ('Inteira 3D', 1.50, '3D');
 INSERT INTO tipos_ingresso (descricao, fator_preco, categoria_tecnica) VALUES ('Meia 3D', 0.75, '3D');
 INSERT INTO tipos_ingresso (descricao, fator_preco, categoria_tecnica) VALUES ('VIP 2D', 1.80, '2D');
+
+-- Inserir Homologacoes (validacao de salas)
+
+-- Sala 1 (IMAX) homologada para 2D e 3D
+INSERT INTO homologacoes (id_filme, id_sala, requisito_tecnico, status_validacao)
+VALUES (1, 1, '2D', 'Aprovado');
+INSERT INTO homologacoes (id_filme, id_sala, requisito_tecnico, status_validacao)
+VALUES (1, 1, '3D', 'Aprovado');
+
+-- Sala 2 (3D) homologada apenas para 3D
+INSERT INTO homologacoes (id_filme, id_sala, requisito_tecnico, status_validacao)
+VALUES (2, 2, '3D', 'Aprovado');
+
+-- Sala 3 (Standard) homologada para 2D
+INSERT INTO homologacoes (id_filme, id_sala, requisito_tecnico, status_validacao)
+VALUES (3, 3, '2D', 'Aprovado');
+
+-- Sala 4 (VIP) homologada para 2D
+INSERT INTO homologacoes (id_filme, id_sala, requisito_tecnico, status_validacao)
+VALUES (4, 4, '2D', 'Aprovado');
