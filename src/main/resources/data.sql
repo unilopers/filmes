@@ -46,3 +46,14 @@ VALUES (3, 3, '2D', 'Aprovado');
 -- Sala 4 (VIP) homologada para 2D
 INSERT INTO homologacoes (id_filme, id_sala, requisito_tecnico, status_validacao)
 VALUES (4, 4, '2D', 'Aprovado');
+
+-- Relacionar Filmes com Gêneros
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (1, 1);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (1, 7);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (2, 5);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (2, 3);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (3, 3);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (3, 4);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (4, 3);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (5, 3);
+INSERT INTO genero_filme (id_filme, id_genero) VALUES (5, 1);

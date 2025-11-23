@@ -40,3 +40,13 @@ CREATE TABLE IF NOT EXISTS homologacoes (
     FOREIGN KEY (id_filme) REFERENCES filmes(id_filme) ON DELETE CASCADE,
     FOREIGN KEY (id_sala) REFERENCES salas(id_sala) ON DELETE CASCADE
     );
+
+
+-- Tabela de Gênero-Filme
+CREATE TABLE IF NOT EXISTS genero_filme (
+    id_filme BIGINT NOT NULL,
+    id_genero BIGINT NOT NULL,
+    PRIMARY KEY (id_filme, id_genero),
+    FOREIGN KEY (id_filme) REFERENCES filmes(id_filme) ON DELETE CASCADE,
+    FOREIGN KEY (id_genero) REFERENCES generos(id_genero) ON DELETE CASCADE
+    );
