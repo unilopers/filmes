@@ -74,3 +74,26 @@ CREATE TABLE IF NOT EXISTS sessao_assento (
     FOREIGN KEY (id_sessao) REFERENCES sessoes(id_sessao) ON DELETE CASCADE,
     UNIQUE (id_sessao, id_assento)
     );
+
+-- Tabela de Usuários
+CREATE TABLE IF NOT EXISTS usuarios (
+    id_usuario BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+
+-- Tabela de Ingressos
+CREATE TABLE IF NOT EXISTS ingressos (
+    id_ingresso BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario BIGINT NOT NULL,
+    id_sessao BIGINT NOT NULL,
+    id_tipo_ingresso BIGINT NOT NULL,
+    id_assento INT NOT NULL,
+    valor_final DECIMAL(10,2),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+    FOREIGN KEY (id_sessao) REFERENCES sessoes(id_sessao) ON DELETE CASCADE,
+    FOREIGN KEY (id_tipo_ingresso) REFERENCES tipos_ingresso(id_tipo_ingresso) ON DELETE CASCADE
+    );

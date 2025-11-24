@@ -57,3 +57,9 @@ INSERT INTO genero_filme (id_filme, id_genero) VALUES (3, 4);
 INSERT INTO genero_filme (id_filme, id_genero) VALUES (4, 3);
 INSERT INTO genero_filme (id_filme, id_genero) VALUES (5, 3);
 INSERT INTO genero_filme (id_filme, id_genero) VALUES (5, 1);
+
+-- Inserir Usuários
+INSERT INTO usuarios (nome, email) VALUES ('João Silva', 'joao.silva@example.com');
+INSERT INTO usuarios (nome, email) VALUES ('Maria Santos', 'maria.santos@example.com');
+INSERT INTO usuarios (nome, email) VALUES ('Pedro Oliveira', 'pedro.oliveira@example.com');
+INSERT INTO usuarios (nome, email) VALUES ('Ana Costa', 'ana.costa@example.com');
