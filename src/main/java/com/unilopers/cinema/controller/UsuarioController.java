@@ -1,6 +1,9 @@
 package com.unilopers.cinema.controller;
 
-import com.unilopers.cinema.model.*;
+import com.unilopers.cinema.dto.request.CreateUsuarioDTO;
+import com.unilopers.cinema.dto.response.UsuarioDTO;
+import com.unilopers.cinema.mapper.UsuarioMapper;
+import com.unilopers.cinema.model.Usuario;
 import com.unilopers.cinema.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,65 +16,64 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuarios")
-class UsuarioController {
+public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private UsuarioMapper usuarioMapper;
+
     @GetMapping
-    public List<Usuario> list() {
-        return usuarioRepository.findAll();
+    public List<UsuarioDTO> list() {
+        return usuarioMapper.toDTOList(usuarioRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> read(@PathVariable Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        return usuario.map(ResponseEntity::ok)
+    public ResponseEntity<UsuarioDTO> read(@PathVariable Long id) {
+        return usuarioRepository.findById(id)
+                .map(usuarioMapper::toDTO)
+                .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario) {
-        Optional<Usuario> existing = usuarioRepository.findByEmail(usuario.getEmail());
+    public ResponseEntity<UsuarioDTO> create(@RequestBody CreateUsuarioDTO dto) {
+        Optional<Usuario> existing = usuarioRepository.findByEmail(dto.getEmail());
         if (existing.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
 
+        Usuario usuario = usuarioMapper.toEntity(dto);
         Usuario saved = usuarioRepository.save(usuario);
+
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(saved.getId())
                 .toUri();
-        return ResponseEntity.created(location).body(saved);
+        return ResponseEntity.created(location).body(usuarioMapper.toDTO(saved));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario details) {
+    public ResponseEntity<UsuarioDTO> update(@PathVariable Long id, @RequestBody CreateUsuarioDTO dto) {
         Optional<Usuario> opt = usuarioRepository.findById(id);
         if (opt.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
         Usuario usuario = opt.get();
-        if (details.getNome() != null) {
-            usuario.setNome(details.getNome());
-        }
-        if (details.getEmail() != null) {
-            usuario.setEmail(details.getEmail());
-        }
-
+        usuarioMapper.updateEntity(usuario, dto);
         Usuario saved = usuarioRepository.save(usuario);
-        return ResponseEntity.ok(saved);
+
+        return ResponseEntity.ok(usuarioMapper.toDTO(saved));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        Optional<Usuario> opt = usuarioRepository.findById(id);
-        if (opt.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        if (usuarioRepository.existsById(id)) {
+            usuarioRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
         }
-        usuarioRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 }
-
