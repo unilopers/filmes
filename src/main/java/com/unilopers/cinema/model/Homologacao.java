@@ -15,9 +15,9 @@ public class Homologacao {
     @Column(name = "id_homologacao")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)  // ✅ EAGER
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_filme", nullable = false)
-    @JsonIgnoreProperties({"generos", "createdAt", "updatedAt"})  // ✅ Evita loop
+    @JsonIgnoreProperties({"generos", "createdAt", "updatedAt"})
     private Filme filme;
 
     @ManyToOne(fetch = FetchType.EAGER)

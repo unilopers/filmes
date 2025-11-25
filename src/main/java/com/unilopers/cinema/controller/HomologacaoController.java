@@ -9,7 +9,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -31,19 +30,17 @@ public class HomologacaoController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Map<String, Object> payload) {
+    public ResponseEntity<?> create(@RequestBody com.unilopers.cinema.dto.request.CreateHomologacaoDTO dto) {
         try {
-            Long idFilme = Long.valueOf(payload.get("idFilme").toString());
-            Long idSala = Long.valueOf(payload.get("idSala").toString());
-            String requisito = payload.getOrDefault("requisitoTecnico", "2D").toString();
-            String status = payload.getOrDefault("statusValidacao", "Aprovado").toString();
-
-            Optional<Filme> filme = filmeRepository.findById(idFilme);
-            Optional<Sala> sala = salaRepository.findById(idSala);
+            Optional<Filme> filme = filmeRepository.findById(dto.getIdFilme());
+            Optional<Sala> sala = salaRepository.findById(dto.getIdSala());
 
             if (filme.isEmpty() || sala.isEmpty()) {
                 return ResponseEntity.badRequest().body("Filme ou Sala não encontrados");
             }
+
+            String requisito = dto.getRequisitoTecnico() != null ? dto.getRequisitoTecnico() : "2D";
+            String status = dto.getStatusValidacao() != null ? dto.getStatusValidacao() : "Aprovado";
 
             Homologacao homologacao = new Homologacao(filme.get(), sala.get(), requisito, status);
             Homologacao saved = homologacaoRepository.save(homologacao);
