@@ -12,11 +12,20 @@ public class CreateUsuarioDTO {
     @JacksonXmlProperty(localName = "email")
     private String email;
 
+    @JacksonXmlProperty(localName = "password")
+    private String password;
+
     public CreateUsuarioDTO() {}
 
     public CreateUsuarioDTO(String nome, String email) {
         this.nome = nome;
         this.email = email;
+    }
+
+    public CreateUsuarioDTO(String nome, String email, String password) {
+        this.nome = nome;
+        this.email = email;
+        this.password = password;
     }
 
     public String getNome() {
@@ -33,6 +42,14 @@ public class CreateUsuarioDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
