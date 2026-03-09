@@ -34,7 +34,13 @@ public class AuthController {
 
             String token = jwtTokenProvider.gerarToken(usuario);
 
-            return ResponseEntity.ok(new AuthResponseDTO(token));
+            AuthResponseDTO responseDTO = new AuthResponseDTO(
+                    token, 
+                    usuario.getUsername(),
+                    "Login realizado com sucesso"
+            );
+
+            return ResponseEntity.ok(responseDTO);
             
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).build();
