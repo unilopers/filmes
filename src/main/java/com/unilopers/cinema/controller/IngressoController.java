@@ -6,11 +6,9 @@ import com.unilopers.cinema.mapper.IngressoMapper;
 import com.unilopers.cinema.model.*;
 import com.unilopers.cinema.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
@@ -82,13 +80,14 @@ public class IngressoController {
             // Calcula valor final
             BigDecimal valorFinal = sessao.get().getPrecoBase().multiply(tipoIngresso.get().getFatorPreco());
 
-            // Cria ingresso
+            // Cria ingresso com status PENDENTE
             Ingresso ingresso = new Ingresso(
                     usuario.get(),
                     sessao.get(),
                     tipoIngresso.get(),
                     dto.getNumeroAssento(),
-                    valorFinal
+                    valorFinal,
+                    "PENDENTE"
             );
 
             Ingresso saved = ingressoRepository.save(ingresso);

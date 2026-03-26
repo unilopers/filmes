@@ -3,7 +3,6 @@ package com.unilopers.cinema.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -36,21 +35,24 @@ public class Ingresso {
     @Column(name = "valor_final")
     private BigDecimal valorFinal;
 
+    @Column(name = "status")
+    private String status;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     public Ingresso() {}
 
-    public Ingresso(Usuario usuario, Sessao sessao, TipoIngresso tipoIngresso, Integer idAssento, BigDecimal valorFinal) {
+    public Ingresso(Usuario usuario, Sessao sessao, TipoIngresso tipoIngresso, Integer idAssento, BigDecimal valorFinal, String status) {
         this.usuario = usuario;
         this.sessao = sessao;
         this.tipoIngresso = tipoIngresso;
         this.idAssento = idAssento;
         this.valorFinal = valorFinal;
+        this.status = status;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -97,6 +99,14 @@ public class Ingresso {
 
     public void setValorFinal(BigDecimal valorFinal) {
         this.valorFinal = valorFinal;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreatedAt() {

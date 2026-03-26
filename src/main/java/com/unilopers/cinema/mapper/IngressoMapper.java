@@ -4,7 +4,6 @@ import com.unilopers.cinema.model.Ingresso;
 import com.unilopers.cinema.dto.response.IngressoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +29,7 @@ public class IngressoMapper {
                 tipoIngressoMapper.toDTO(ingresso.getTipoIngresso()),
                 ingresso.getIdAssento(),
                 ingresso.getValorFinal(),
+                ingresso.getStatus(),
                 ingresso.getCreatedAt()
         );
     }
