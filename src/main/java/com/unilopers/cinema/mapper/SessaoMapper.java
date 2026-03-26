@@ -27,6 +27,7 @@ public class SessaoMapper {
                 sessao.getDataHora(),
                 sessao.getPrecoBase(),
                 sessao.getTipoExibicao(),
+                sessao.getStatus(),
                 sessao.getCreatedAt(),
                 sessao.getUpdatedAt()
         );

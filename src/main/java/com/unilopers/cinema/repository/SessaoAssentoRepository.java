@@ -13,4 +13,5 @@ public interface SessaoAssentoRepository extends JpaRepository<SessaoAssento, Lo
     Optional<SessaoAssento> findBySessaoAndIdAssento(Sessao sessao, Integer idAssento);
     List<SessaoAssento> findBySessao(Sessao sessao);
     List<SessaoAssento> findBySessaoAndReservado(Sessao sessao, Boolean reservado);
+    long countBySessao(Sessao sessao);
 }

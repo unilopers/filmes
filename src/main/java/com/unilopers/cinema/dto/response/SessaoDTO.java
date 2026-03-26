@@ -27,6 +27,9 @@ public class SessaoDTO {
     @JacksonXmlProperty(localName = "tipoExibicao")
     private String tipoExibicao;
 
+    @JacksonXmlProperty(localName = "status")
+    private String status;
+
     @JacksonXmlProperty(localName = "createdAt")
     private LocalDateTime createdAt;
 
@@ -36,13 +39,14 @@ public class SessaoDTO {
     public SessaoDTO() {}
 
     public SessaoDTO(Long id, FilmeSimplesDTO filme, SalaDTO sala, LocalDateTime dataHora,
-                     BigDecimal precoBase, String tipoExibicao, LocalDateTime createdAt, LocalDateTime updatedAt) {
+                     BigDecimal precoBase, String tipoExibicao, String status, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.filme = filme;
         this.sala = sala;
         this.dataHora = dataHora;
         this.precoBase = precoBase;
         this.tipoExibicao = tipoExibicao;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -94,6 +98,14 @@ public class SessaoDTO {
 
     public void setTipoExibicao(String tipoExibicao) {
         this.tipoExibicao = tipoExibicao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreatedAt() {

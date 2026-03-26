@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import com.unilopers.cinema.service.async.SessaoAsyncService;
 
 import java.net.URI;
 import java.util.List;
@@ -32,6 +33,9 @@ public class SessaoController {
 
     @Autowired
     private HomologacaoRepository homologacaoRepository;
+
+    @Autowired
+    private SessaoAsyncService sessaoAsyncService;
 
     @Autowired
     private SessaoMapper sessaoMapper;
@@ -78,13 +82,11 @@ public class SessaoController {
             sessao.setDataHora(dto.getDataHora());
             sessao.setPrecoBase(dto.getPrecoBase());
             sessao.setTipoExibicao(dto.getTipoExibicao());
+            sessao.setStatus("PENDENTE");
 
             Sessao saved = sessaoRepository.save(sessao);
 
-            for (int i = 1; i <= sala.get().getCapacidade(); i++) {
-                SessaoAssento assento = new SessaoAssento(saved, i, false);
-                sessaoAssentoRepository.save(assento);
-            }
+            sessaoAsyncService.gerarAssentos(saved.getId(), sala.get().getCapacidade());
 
             SessaoDTO responseDTO = sessaoMapper.toDTO(saved);
 

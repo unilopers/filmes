@@ -35,6 +35,9 @@ public class Sessao {
     @Column(name = "tipo_exibicao")
     private String tipoExibicao;
 
+    @Column(name = "status")
+    private String status = "PENDENTE";
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
@@ -92,6 +95,14 @@ public class Sessao {
 
     public void setTipoExibicao(String tipoExibicao) {
         this.tipoExibicao = tipoExibicao;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreatedAt() {
