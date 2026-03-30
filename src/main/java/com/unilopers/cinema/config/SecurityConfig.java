@@ -1,6 +1,7 @@
 package com.unilopers.cinema.config;
 
 import com.unilopers.cinema.security.JwtAuthenticationFilter;
+import org.springframework.http.HttpMethod;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +37,19 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
+
+                        .requestMatchers("/homologacoes/**").hasRole("ADMIN")
+                        .requestMatchers("/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers("/tipos-ingresso/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/filmes/**", "/sessoes/**", "/salas/**", "/generos/**").hasAnyRole("USER", "ADMIN")
+
+                        .requestMatchers("/ingressos/**").hasAnyRole("USER", "ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
 

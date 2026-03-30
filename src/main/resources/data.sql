@@ -63,3 +63,4 @@ INSERT INTO usuarios (nome, email, password, roles) VALUES ('João Silva', 'joao
 INSERT INTO usuarios (nome, email, password, roles) VALUES ('Maria Santos', 'maria.santos@example.com', '$2a$10$pzIsJpmc/CrRAzOH37IfK.fs34J3fnHsHN7VPsnVpcT285lrin/e.', 'ROLE_USER');
 INSERT INTO usuarios (nome, email, password, roles) VALUES ('Pedro Oliveira', 'pedro.oliveira@example.com', '$2a$10$pzIsJpmc/CrRAzOH37IfK.fs34J3fnHsHN7VPsnVpcT285lrin/e.', 'ROLE_USER');
 INSERT INTO usuarios (nome, email, password, roles) VALUES ('Ana Costa', 'ana.costa@example.com', '$2a$10$pzIsJpmc/CrRAzOH37IfK.fs34J3fnHsHN7VPsnVpcT285lrin/e.', 'ROLE_USER');
+INSERT INTO usuarios (nome, email, password, roles) VALUES ('Admin Cinema', 'admin@cinema.com', '$2a$10$pzIsJpmc/CrRAzOH37IfK.fs34J3fnHsHN7VPsnVpcT285lrin/e.', 'ROLE_ADMIN');
