@@ -13,7 +13,12 @@ public class SalaMapper {
 
     public SalaDTO toDTO(Sala sala) {
         if (sala == null) return null;
-        return new SalaDTO(sala.getId(), sala.getNome(), sala.getCapacidade());
+        return new SalaDTO(
+            sala.getId(), 
+            sala.getNome(), 
+            sala.getCapacidade(), 
+            sala.getDisponivel()
+        );
     }
 
     public Sala toEntity(CreateSalaDTO dto) {
