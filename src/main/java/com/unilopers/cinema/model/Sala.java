@@ -25,6 +25,7 @@ public class Sala {
     public Sala(String nome, Integer capacidade) {
         this.nome = nome;
         this.capacidade = capacidade;
+        this.disponivel = true;
     }
 
     public Long getId() {
