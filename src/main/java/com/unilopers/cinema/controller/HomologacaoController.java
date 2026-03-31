@@ -54,6 +54,12 @@ public class HomologacaoController {
 
             String requisito = dto.getRequisitoTecnico() != null ? dto.getRequisitoTecnico() : "2D";
 
+            // Evita duplicidade de homologação
+            if (homologacaoRepository.existsByFilmeAndSalaAndRequisitoTecnicoAndStatusValidacao(
+                    filme.get(), sala.get(), requisito, "Aprovado")) {
+                return ResponseEntity.badRequest().body("Este filme já possui homologação aprovada para esta sala neste formato.");
+            }
+
             Homologacao homologacao = new Homologacao(filme.get(), sala.get(), requisito, "Pendente");
             Homologacao saved = homologacaoRepository.save(homologacao);
 

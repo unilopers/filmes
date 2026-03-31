@@ -55,6 +55,19 @@ public class SessaoController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{id}/assentos")
+    public ResponseEntity<List<com.unilopers.cinema.dto.response.SessaoAssentoDTO>> listAssentos(@PathVariable Long id) {
+        Optional<Sessao> sessao = sessaoRepository.findById(id);
+        if (sessao.isEmpty()) return ResponseEntity.notFound().build();
+
+        List<com.unilopers.cinema.dto.response.SessaoAssentoDTO> assentos = sessaoAssentoRepository.findBySessao(sessao.get())
+                .stream()
+                .map(a -> new com.unilopers.cinema.dto.response.SessaoAssentoDTO(a.getIdAssento(), a.getReservado()))
+                .toList();
+
+        return ResponseEntity.ok(assentos);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CreateSessaoDTO dto) {
         try {
@@ -74,6 +87,11 @@ public class SessaoController {
                 return ResponseEntity.badRequest().body(
                         "Sala não homologada para exibir este filme em " + dto.getTipoExibicao()
                 );
+            }
+
+            // Valida conflito de horário
+            if (sessaoRepository.existsBySalaAndDataHora(sala.get(), dto.getDataHora())) {
+                return ResponseEntity.badRequest().body("Conflito de Agenda: A sala já possui uma sessão neste horário.");
             }
 
             Sessao sessao = new Sessao();
