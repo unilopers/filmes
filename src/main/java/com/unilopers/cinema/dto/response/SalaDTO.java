@@ -15,16 +15,12 @@ public class SalaDTO {
     @JacksonXmlProperty(localName = "capacidade")
     private Integer capacidade;
 
-    @JacksonXmlProperty(localName = "disponivel")
-    private Boolean disponivel;
-
     public SalaDTO() {}
 
-    public SalaDTO(Long id, String nome, Integer capacidade, Boolean disponivel) {
+    public SalaDTO(Long id, String nome, Integer capacidade) {
         this.id = id;
         this.nome = nome;
         this.capacidade = capacidade;
-        this.disponivel = disponivel;
     }
 
     // Getters e Setters
@@ -45,11 +41,5 @@ public class SalaDTO {
     }
     public void setCapacidade(Integer capacidade) {
         this.capacidade = capacidade;
-    }
-    public Boolean getDisponivel() {
-        return disponivel;
-    }
-    public void setDisponivel(Boolean disponivel) {
-        this.disponivel = disponivel;
     }
 }
