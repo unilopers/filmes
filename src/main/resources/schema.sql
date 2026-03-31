@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS generos (
 CREATE TABLE IF NOT EXISTS salas (
    id_sala BIGINT AUTO_INCREMENT PRIMARY KEY,
    nome VARCHAR(50),
-   capacidade INT
+   capacidade INT,
+   disponivel BOOLEAN DEFAULT TRUE
    );
 
 -- Tabela de Filmes
